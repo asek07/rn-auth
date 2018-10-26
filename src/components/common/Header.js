@@ -3,16 +3,19 @@ import {  StyleSheet, Text, View } from 'react-native';
 
 
 const Header = ({headerTitle}) => {
+
+  const { viewStyle, headerStyle} = styles
+
   return (
-    <View style={styles.viewStyle}> 
-        <Text style={styles.headerStyle}>{headerTitle}</Text>
+    <View style={viewStyle}> 
+        <Text style={headerStyle}>{headerTitle}</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   viewStyle: {
-    backgroundColor: '#ff7979',
+    backgroundColor: '#686de0',
     justifyContent: 'center',
     alignItems: 'center',
     height: 60,
@@ -24,7 +27,8 @@ const styles = StyleSheet.create({
   },
   headerStyle: {  
     fontSize: 20, 
-    color: '#fff' 
+    color: '#fff',
+    fontWeight: '600' 
   }
 });
 
