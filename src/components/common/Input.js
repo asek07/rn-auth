@@ -12,6 +12,7 @@ const Input = ({label, value, onChangeText}) => {
           style={inputStyle}
           onChangeText={onChangeText}
           value={value}
+          underlineColorAndroid='transparent'
       />
     </View>
   )
