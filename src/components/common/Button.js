@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#007aff',
     marginLeft: 5, 
-    marginRight: 5
+    marginRight: 5,
+    height: 20
   },
   buttonText: {
     alignSelf: 'center',

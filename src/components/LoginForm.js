@@ -1,15 +1,55 @@
 import React, { Component } from 'react';
-import { TextInput, StyleSheet } from 'react-native';
-import {Card, CardSection, Button, Input} from './common'
-
+import { Text, StyleSheet } from 'react-native';
+import {Card, CardSection, Button, Input, Spinner} from './common'
+import firebase from 'firebase';
 class LoginForm extends Component {
 
   constructor() {
     super();
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      error: '',
+      loading: false 
     }
+  }
+
+  loginUser = () => {
+    const {email, password} = this.state;
+
+    this.setState({ error: '', loading: true})
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(this.loginSuccess())
+      .catch(() => {
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+          .then(this.loginSuccess())
+          .catch(this.loginFailed())
+      })
+  }
+
+  loginSuccess = () => {
+    this.setState({
+      email: '',
+      password: '',
+      error: '',
+      loading: false
+    })
+  }
+
+  loginFailed = () => {
+    this.setState({error: "Authentication Failed.", loading: false});
+  }
+
+  renderButton = () => {
+    if(this.state.loading) {
+      return <Spinner size="small" />
+    }
+
+    return (
+      <Button text={'Login'} onPress={this.loginUser}/> 
+    );
+
   }
 
   render() {
@@ -33,18 +73,23 @@ class LoginForm extends Component {
              />
         </CardSection>
         <CardSection>
-            <Button text={'Login'}/> 
+           {this.renderButton()}
         </CardSection>
+        <Text style={styles.errorTextStyle}>
+          {this.state.error}
+        </Text>
       </Card>
     )
   }
 }
 
-// const styles = StyleSheet.create({
-//   inputTextStyle: {
-//     height: 20,
-//     width: 100
-//   }
-// })
+const styles = StyleSheet.create({
+  errorTextStyle: {
+    fontSize: 20,
+    alignSelf: 'center',
+    color: 'red',
+    fontWeight: '500'
+  }
+})
 
 export default LoginForm;
