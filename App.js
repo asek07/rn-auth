@@ -17,14 +17,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    firebase.initializeApp({
-      apiKey: 'AIzaSyCurHKk3clhDoFsSvEmV01WLA1kx3Cn7_4',
-      authDomain: 'rn-authentication-33599.firebaseapp.com',
-      databaseURL: 'https://rn-authentication-33599.firebaseio.com',
-      projectId: 'rn-authentication-33599',
-      storageBucket: 'rn-authentication-33599.appspot.com',
-      messagingSenderId: '325262244376'
-    })
+  //firebase authentication code
 
     // firebase.auth().onAuthStateChanged((user) => {
     //   if(user) {
